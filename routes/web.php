@@ -13,6 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'MainController@index');
+Route::get('/', 'MainController@index')->name('index');
 Route::get('/categories', 'MainController@categories');
-Route::get('/pizza/{product}', 'MainController@pizza');
+Route::get('/pizza/{product}', 'MainController@pizza')->name('pizza');

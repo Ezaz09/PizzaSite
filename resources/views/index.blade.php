@@ -3,7 +3,7 @@
 @section('content')
         <div class="starter-template">
             <h1>Все товары</h1>
-            <form method="GET" action="/">
+            <form method="GET" action="{{ route('index') }}">
                 <div class="filters row">
                     <div class="col-sm-6 col-md-3">
                         <label for="price_from">Цена от <input type="text" name="price_from" id="price_from" size="6"
@@ -38,10 +38,10 @@
                         <div class="caption">
                             <h3>{{$product->name}}</h3>
                             <p>{{$product->price}} $</p>
-                            <p>
+                            <p> 
                                 <form action="/basket/add/{{$product->id}}" method="POST">
                                     <button type="submit" class="btn btn-primary" role="button">В корзину</button>
-                                    <a href="/pizza/{{$product->id}}" class="btn btn-default" role="button">Подробнее</a>
+                                    <a href="{{ route('pizza', $product->id) }}" class="btn btn-default" role="button">Подробнее</a>
                                     <input type="hidden" name="_token" value="5xuns3158vHpfAY5gslisVYNVdPidQ8lujVkhM0u">
                                 </form>
                             </p>

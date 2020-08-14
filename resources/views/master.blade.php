@@ -19,11 +19,11 @@
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
-                <a class="navbar-brand" href="/">Pizza time!</a>
+                <a class="navbar-brand" href="{{ route('index') }}">Pizza time!</a>
             </div>
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="/">Все товары</a></li>
+                    <li><a href="{{ route('index') }}">Все товары</a></li>
                     <li><a href="/categories">Категории</a>
                     </li>
                     <li><a href="/basket">В корзину</a></li>
