@@ -24,7 +24,7 @@
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li><a href="/">Все товары</a></li>
-                    <li class="active"><a href="/categories">Категории</a>
+                    <li><a href="/categories">Категории</a>
                     </li>
                     <li><a href="/basket">В корзину</a></li>
                     <li><a href="/reset">Сбросить проект в начальное состояние</a></li>
@@ -50,36 +50,8 @@
     </nav>
 
     <div class="container">
-        <div class="starter-template">
-            <div class="panel">
-                <a href="/pizza">
-                    <img src="/storage/categories/pizza.jpg">
-                    <h2>Пицца</h2>
-                </a>
-                <p>
-                    В этом разделе вы найдёте самые вкусные пиццы по отличным ценам!
-                </p>
-            </div>
-            <div class="panel">
-                <a href="/portable">
-                    <img src="/storage/categories/portable.jpg">
-                    <h2>Портативная техника</h2>
-                </a>
-                <p>
-                    Раздел с портативной техникой.
-                </p>
-            </div>
-            <div class="panel">
-                <a href="/appliances">
-                    <img src="storage/categories/appliance.jpg">
-                    <h2>Бытовая техника</h2>
-                </a>
-                <p>
-                    Раздел с бытовой техникой
-                </p>
-            </div>
-        </div>
+        @yield('content')
     </div>
-</body>
 
+</body>
 </html>

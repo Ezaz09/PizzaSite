@@ -8,15 +8,16 @@ use Illuminate\Http\Request;
 class MainController extends Controller
 {
     public function index(){
-        return view('index');
+        $products = Product::get();
+        return view('index', compact('products'));
     }
 
     public function categories(){
         return view('categories');
     }
 
-    public function pizza($product){
-        Product::where('name', $product)->first();
-        return view($product);
+    public function pizza($id){
+        $product = Product::where('id', $id)->first();
+        return view('pizza',compact('product'));
     }
 }

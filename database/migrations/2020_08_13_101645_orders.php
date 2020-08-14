@@ -15,6 +15,7 @@ class Orders extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->integer('idOfUser')->nullable();
             $table->bigInteger('numberOfOrder');
             $table->string('name');
             $table->string('surname');
