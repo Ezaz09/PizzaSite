@@ -16,9 +16,9 @@ class Products extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->bigInteger('price')->default(0);
-            $table->text('description')->nullable();
-            $table->text('srcOfImage')->nullable();
+            $table->bigInteger('price');
+            $table->text('description');
+            $table->text('srcOfImage');
             $table->timestamps();
         }); 
     }

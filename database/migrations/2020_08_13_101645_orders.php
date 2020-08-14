@@ -20,8 +20,8 @@ class Orders extends Migration
             $table->string('surname');
             $table->string('product');
             $table->string('deliveryAddress');
-            $table->bigInteger('countOfProduct')->default(0);
-            $table->bigInteger('amountPerLine')->default(0);
+            $table->bigInteger('countOfProduct');
+            $table->bigInteger('amountPerLine');
             $table->timestamps();
         });
     }
