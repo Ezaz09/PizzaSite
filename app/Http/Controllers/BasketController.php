@@ -29,7 +29,15 @@ class BasketController extends Controller
         {
             return redirect()->route('index');
         }
+    
         $order = Order::find($orderId);
+
+        if($order->calculateTotalPriceForOrder() == 10)
+        {
+            session()->flash('emptyBasket', 'Your basket is empty!');
+            return redirect()->route('basket'); 
+        }
+
         return view('order', compact('order'));
     }
 
@@ -37,7 +45,7 @@ class BasketController extends Controller
         $orderId = session('orderId');
         if (is_null($orderId))
         {
-            $order = $this->createOrder();
+            return redirect()->route('index');
         }
         $order = Order::find($orderId);
         $order->saveOrder($request->name,
@@ -105,7 +113,7 @@ class BasketController extends Controller
             $ordersArray = $orders[count($orders)-1]->toArray();
             $numberOfLastOrder = $ordersArray["numberOfOrder"];
     
-            $orderDescription = ['numberOfOrder' =>  "order".$numberOfLastOrder.(strval(random_int(0,1000)))];
+            $orderDescription = ['numberOfOrder' =>  $numberOfLastOrder.(strval(random_int(0,1000)))];
         }
         $order = Order::create($orderDescription);
         session(['orderId' => $order->id]);

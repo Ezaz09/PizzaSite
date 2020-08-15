@@ -19,10 +19,11 @@ class Order extends Model
 
     public function calculateTotalPriceForOrder(){
         $sum = 0;
+        $priceForDelivery = 10;
         foreach($this->products as $product) {
             $sum += $product->getPriceForCount();
         }
-        return $sum+10;
+        return $sum+$priceForDelivery;
     }
 
     public function saveOrder($name, $surname, $deliveryAddress)
@@ -30,6 +31,7 @@ class Order extends Model
         $this->name = $name;
         $this->surname = $surname;
         $this->deliveryAddress = $deliveryAddress;
+        $this->totalPrice = $this->calculateTotalPriceForOrder();
         $this->save();
 
         session()->forget('orderId');
