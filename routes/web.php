@@ -14,5 +14,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'MainController@index')->name('index');
-Route::get('/categories', 'MainController@categories');
+Route::get('/categories', 'MainController@categories')->name('categories');
 Route::get('/pizza/{product}', 'MainController@pizza')->name('pizza');
+
+Route::get('/basket', 'BasketController@basket')->name('basket');
+Route::get('/basket/place', 'BasketController@basketPlace')->name('basket-place');
+Route::post('/basket/place', 'BasketController@basketConfirm')->name('basket-confirm');
+
+Route::post('/basket/add/{product}', 'BasketController@basketAdd')->name('basket-add');
+Route::post('/basket/remove/{product}', 'BasketController@basketRemove')->name('basket-remove');

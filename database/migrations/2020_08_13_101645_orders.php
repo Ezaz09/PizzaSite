@@ -16,13 +16,13 @@ class Orders extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->integer('idOfUser')->nullable();
-            $table->bigInteger('numberOfOrder');
-            $table->string('name');
-            $table->string('surname');
-            $table->string('product');
-            $table->string('deliveryAddress');
-            $table->bigInteger('countOfProduct');
-            $table->bigInteger('amountPerLine');
+            $table->string('numberOfOrder');
+            $table->string('name')->nullable();
+            $table->string('surname')->nullable();
+            //$table->string('product');
+            $table->string('deliveryAddress')->nullable();
+            //$table->bigInteger('countOfProduct');
+            //$table->bigInteger('amountPerLine');
             $table->timestamps();
         });
     }

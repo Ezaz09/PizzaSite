@@ -50,6 +50,12 @@
     </nav>
 
     <div class="container">
+        @if(session()->has('successConfirm'))
+            <p class="alert alert-success"> {{ session()->get('successConfirm') }}</p> 
+        @endif
+        @if(session()->has('emptyBasket'))
+            <p class="alert alert-warning"> {{ session()->get('emptyBasket') }}</p> 
+        @endif
         @yield('content')
     </div>
 
