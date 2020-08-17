@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use App\Order;
 use App\Product;
 use Illuminate\Http\Request;
@@ -38,7 +39,17 @@ class BasketController extends Controller
             return redirect()->route('basket'); 
         }
 
-        return view('order', compact('order'));
+        $authUser = Auth::user();
+        if($authUser != null)
+        {
+            $user = $authUser->toArray(); 
+        } else {
+            $user = null;
+        }
+
+        $information  = array('information' => ['order' => $order, 'user' => $user]);
+
+        return view('order', $information);
     }
 
     public function basketConfirm(Request $request){
@@ -48,7 +59,17 @@ class BasketController extends Controller
             return redirect()->route('index');
         }
         $order = Order::find($orderId);
-        $order->saveOrder($request->name,
+
+        $authUser = Auth::user();
+        if($authUser != null)
+        {
+            $idOfUser = $authUser->toArray()['id'];
+        } else {
+            $idOfUser = null; 
+        }
+
+        $order->saveOrder($idOfUser,
+                          $request->name,
                           $request->surname,
                           $request->deliveryAddress);
         session()->flash('successConfirm', 'Your order is confirmed!');

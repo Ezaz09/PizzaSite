@@ -23,18 +23,12 @@
             </div>
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ route('index') }}">Все товары</a></li>
-                    <li><a href="/categories">Категории</a>
-                    </li>
-                    <li><a href="/basket">В корзину</a></li>
-                    <li><a href="/reset">Сбросить проект в начальное состояние</a></li>
-                    <li><a href="/locale/en">en</a></li>
+                    <li><a href="/basket">To basket</a></li>
 
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                            aria-expanded="false">₽<span class="caret"></span></a>
+                            aria-expanded="false">$<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="/currency/RUB">₽</a></li>
                             <li><a href="/currency/USD">$</a></li>
                             <li><a href="/currency/EUR">€</a></li>
                         </ul>
@@ -42,8 +36,14 @@
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/login">Войти</a></li>
+                    @guest
+                    <li><a href="{{ route('login') }}">Login</a></li>
+                    @endguest
 
+                    @auth
+                    <li><a href="{{ route('your-account') }}">Your account</a></li>
+                    <li><a href="{{ route('get-logout') }}">Logout</a></li>
+                    @endauth
                 </ul>
             </div>
         </div>
@@ -51,13 +51,14 @@
 
     <div class="container">
         @if(session()->has('successConfirm'))
-            <p class="alert alert-success"> {{ session()->get('successConfirm') }}</p> 
+        <p class="alert alert-success"> {{ session()->get('successConfirm') }}</p>
         @endif
         @if(session()->has('emptyBasket'))
-            <p class="alert alert-warning"> {{ session()->get('emptyBasket') }}</p> 
+        <p class="alert alert-warning"> {{ session()->get('emptyBasket') }}</p>
         @endif
         @yield('content')
     </div>
 
 </body>
+
 </html>

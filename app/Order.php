@@ -26,8 +26,9 @@ class Order extends Model
         return $sum+$priceForDelivery;
     }
 
-    public function saveOrder($name, $surname, $deliveryAddress)
+    public function saveOrder($idOfuser, $name, $surname, $deliveryAddress)
     {
+        $this->idOfUser = $idOfuser;
         $this->name = $name;
         $this->surname = $surname;
         $this->deliveryAddress = $deliveryAddress;

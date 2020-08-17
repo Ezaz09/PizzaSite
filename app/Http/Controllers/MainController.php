@@ -20,4 +20,5 @@ class MainController extends Controller
         $product = Product::where('id', $id)->first();
         return view('pizza',compact('product'));
     }
-}
+
+}  
