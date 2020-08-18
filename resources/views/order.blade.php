@@ -7,7 +7,7 @@
     <h1>Accept order</h1>
     <div class="container">
         <div class="row justify-content-center">
-            <p>Total price for order: <b>{{ $order->calculateTotalPriceForOrder() }} $.</b></p>
+            <p>Total price for order: <b>{{ $information['totalPrice'] }} $.</b></p>
             <form action="{{ route('basket-confirm') }}" method="POST">
                 <div>
                     <p>Enter information about yourself for order:</p>
@@ -17,7 +17,11 @@
                             <label for="name" class="control-label col-lg-offset-3 col-lg-2">Name:
                             </label>
                             <div class="col-lg-4">
+                                @if( $information['user'] != null)
+                                <input type="text" required name="name" id="name" value="{{ $information['user']['name'] }}" class="form-control">
+                                @else 
                                 <input type="text" required name="name" id="name" value="" class="form-control">
+                                @endif
                             </div>
                         </div>
                         <br>
@@ -26,7 +30,11 @@
                             <label for="name"
                                 class="control-label col-lg-offset-3 col-lg-2">Surname: </label>
                             <div class="col-lg-4">
+                                @if( $information['user'] != null)
+                                <input type="text" required name="surname" id="surname" value="{{ $information['user']['surname'] }}" class="form-control">
+                                @else 
                                 <input type="text" required name="surname" id="surname" value="" class="form-control">
+                                @endif
                             </div>
                         </div>
                         <br>

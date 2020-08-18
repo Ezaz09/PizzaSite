@@ -3,7 +3,7 @@
 @section('content')
 <div class="starter-template">
     <h1>{{$product->name}}</h1>
-    <p>Price: <b>{{$product->price}} $</b></p>
+    <p>Price: <b>{{$product->price}} {{session('currencySymbol', '$')}}</b></p>
     <img src="{{$product->srcOfImage}}">
     <p>{{$product->description}}</p>
 

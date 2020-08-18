@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use App\Order;
 use App\Product;
 use Illuminate\Http\Request;
@@ -31,14 +32,23 @@ class BasketController extends Controller
         }
     
         $order = Order::find($orderId);
-
-        if($order->calculateTotalPriceForOrder() == 10)
+        $totalPrice = $order->calculateTotalPriceForOrder();
+        if($totalPrice == 10)
         {
             session()->flash('emptyBasket', 'Your basket is empty!');
             return redirect()->route('basket'); 
         }
 
-        return view('order', compact('order'));
+        if(Auth::check() == true)
+        {
+            $user = Auth::user()->toArray(); 
+        } else {
+            $user = null;
+        }
+
+        $information  = array('information' => ['totalPrice' => $totalPrice, 'user' => $user]);
+
+        return view('order', $information);
     }
 
     public function basketConfirm(Request $request){
@@ -48,7 +58,17 @@ class BasketController extends Controller
             return redirect()->route('index');
         }
         $order = Order::find($orderId);
-        $order->saveOrder($request->name,
+
+
+        if(Auth::check() == true)
+        {
+            $userId =  Auth::user()->toArray()['id'];
+        } else {
+            $userId = null; 
+        }
+
+        $order->saveOrder($userId,
+                          $request->name,
                           $request->surname,
                           $request->deliveryAddress);
         session()->flash('successConfirm', 'Your order is confirmed!');
@@ -96,6 +116,11 @@ class BasketController extends Controller
             }
         }
 
+       if($order->products()->count() == 0){
+           $order->delete();
+           session()->forget('orderId');
+       }
+
         $product = Product::find($productId);
         session()->flash('successRemove', $product->name);
         
@@ -106,17 +131,22 @@ class BasketController extends Controller
         $orders = Order::get();
         if(count($orders) == 0)
         {
-            $orderDescription = ['numberOfOrder' =>  "order".(strval(random_int(0,1000)))];
+            $orderDescription = ['numberOfOrder' =>  "order".(strval(random_int(1,10)))];
         }
         else
         {
             $ordersArray = $orders[count($orders)-1]->toArray();
             $numberOfLastOrder = $ordersArray["numberOfOrder"];
     
-            $orderDescription = ['numberOfOrder' =>  $numberOfLastOrder.(strval(random_int(0,1000)))];
+            $orderDescription = ['numberOfOrder' =>  $numberOfLastOrder.(strval(random_int(1,10)))];
         }
         $order = Order::create($orderDescription);
         session(['orderId' => $order->id]);
         return $order; 
+    }
+
+
+    private function deleteOrder(){
+
     }
 }
