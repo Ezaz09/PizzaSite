@@ -116,6 +116,11 @@ class BasketController extends Controller
             }
         }
 
+       if($order->products()->count() == 0){
+           $order->delete();
+           session()->forget('orderId');
+       }
+
         $product = Product::find($productId);
         session()->flash('successRemove', $product->name);
         
@@ -138,5 +143,10 @@ class BasketController extends Controller
         $order = Order::create($orderDescription);
         session(['orderId' => $order->id]);
         return $order; 
+    }
+
+
+    private function deleteOrder(){
+
     }
 }

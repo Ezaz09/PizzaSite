@@ -29,7 +29,7 @@
                 @endforeach
                 <tr>
                     <td colspan="3">Delivery price:</td>
-                    <td>{{$order->getPriceForDelivery()}} {{$order->currencyOfOrder}}</td>
+                    <td>{{$order->getPriceForDelivery()}} {{session('currencySymbol', '$')}}</td>
                 </tr>
                 <tr>
                     <td colspan="3">Total price:</td>
