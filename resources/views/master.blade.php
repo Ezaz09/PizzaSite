@@ -27,10 +27,11 @@
 
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                            aria-expanded="false">$<span class="caret"></span></a>
+                            aria-expanded="false">{{session('currencySymbol', '$')}}<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="/currency/USD">$</a></li>
-                            <li><a href="/currency/EUR">€</a></li>
+                           @foreach(App\Services\CurrencyConvertion::getCurrencies() as $currency)
+                           <li><a href="{{ route('currency',  $currency->code) }}">{{ $currency->symbol }}</a></li>
+                           @endforeach
                         </ul>
                     </li>
                 </ul>

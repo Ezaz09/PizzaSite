@@ -9,8 +9,8 @@
                 <tr>
                     <th>Name of product</th>
                     <th>Count of product</th>
-                    <th>Price</th>
-                    <th>Total price</th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -23,17 +23,17 @@
                         </a>
                     </td>
                     <td><span class="badge"> {{ $product->pivot->count }}</span></td>
-                    <td>{{$product->price}} $</td>
-                    <td>{{$product->getPriceForCount()}} $</td>
+                    <td> </td>
+                    <td> </td>
                 </tr>
                 @endforeach
                 <tr>
                     <td colspan="3">Delivery price:</td>
-                    <td>10 $</td>
+                    <td>{{$order->getPriceForDelivery()}} {{$order->currencyOfOrder}}</td>
                 </tr>
                 <tr>
                     <td colspan="3">Total price:</td>
-                    <td>{{ $order->calculateTotalPriceForOrder() }} $</td>
+                    <td>{{ $order->totalPrice }} {{$order->currencyOfOrder}}</td>
                 </tr>
             </tbody>
         </table>

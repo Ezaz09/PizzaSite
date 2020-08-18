@@ -7,7 +7,7 @@
     <h1>Accept order</h1>
     <div class="container">
         <div class="row justify-content-center">
-            <p>Total price for order: <b>{{ $information['order']->calculateTotalPriceForOrder() }} $.</b></p>
+            <p>Total price for order: <b>{{ $information['totalPrice'] }} $.</b></p>
             <form action="{{ route('basket-confirm') }}" method="POST">
                 <div>
                     <p>Enter information about yourself for order:</p>

@@ -3,10 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Services\CurrencyConvertion;
 
 class Order extends Model
 {
-    protected $fillable = ['idOfUser', 'numberOfOrder', 'name', 'surname', 'deliveryAddress'];
+    protected $fillable = ['user_id', 'numberOfOrder', 'name', 'surname', 'deliveryAddress'];
 
     public function products(){
         return $this->belongsToMany(Product::class)->withPivot('count')->withTimestamps();
@@ -19,22 +20,35 @@ class Order extends Model
 
     public function calculateTotalPriceForOrder(){
         $sum = 0;
-        $priceForDelivery = 10;
+        $priceForDelivery = $this->getPriceForDelivery();
         foreach($this->products as $product) {
             $sum += $product->getPriceForCount();
         }
         return $sum+$priceForDelivery;
     }
 
-    public function saveOrder($idOfuser, $name, $surname, $deliveryAddress)
+    public function saveOrder($userId, $name, $surname, $deliveryAddress)
     {
-        $this->idOfUser = $idOfuser;
+        $this->user_id = $userId;
         $this->name = $name;
         $this->surname = $surname;
         $this->deliveryAddress = $deliveryAddress;
         $this->totalPrice = $this->calculateTotalPriceForOrder();
+        $this->currencyOfOrder = session('currencySymbol', '$');
         $this->save();
 
         session()->forget('orderId');
+    }
+
+    public function getPriceForDelivery()
+    {
+        if(session('currency', 'USD') == 'USD')
+        {
+            return 10;
+        }
+        else 
+        {
+            return round(CurrencyConvertion::convert(10),2);
+        }
     }
 }

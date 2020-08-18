@@ -10,14 +10,21 @@ class AccountController extends Controller
 {
     public function account()
     {
-        $idOfuser = Auth::user()->toArray()['id'];
-        $orders = Order::where('idOfUser', $idOfuser)->get();
+        $userId = Auth::user()->toArray()['id'];
+        $orders = Order::where('user_id', $userId)->get();
         return view('auth.orders.index', compact('orders'));
     }
 
     public function getOrder($numberOfOrder)
     {
         $order = Order::where('numberOfOrder', $numberOfOrder)->first();
+
+        if(!Auth::user()->orders->contains($order))
+        {
+            return back();
+        }
+        
         return view('auth.orders.order',compact('order'));
     }
 }
+ 

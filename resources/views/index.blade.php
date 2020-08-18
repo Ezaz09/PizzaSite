@@ -10,7 +10,7 @@
                 <img src="{{$product->srcOfImage}}" alt="Пеперони">
                 <div class="caption">
                     <h3>{{$product->name}}</h3>
-                    <p>{{$product->price}} $</p>
+                    <p>{{$product->price}} {{session('currencySymbol', '$')}}</p>
                     <p>
                         <form action="{{ route('basket-add', $product->id) }}" method="POST">
                             <button type="submit" class="btn btn-primary" role="button">Add to basket</button>

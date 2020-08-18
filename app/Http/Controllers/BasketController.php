@@ -32,22 +32,21 @@ class BasketController extends Controller
         }
     
         $order = Order::find($orderId);
-
-        if($order->calculateTotalPriceForOrder() == 10)
+        $totalPrice = $order->calculateTotalPriceForOrder();
+        if($totalPrice == 10)
         {
             session()->flash('emptyBasket', 'Your basket is empty!');
             return redirect()->route('basket'); 
         }
 
-        $authUser = Auth::user();
-        if($authUser != null)
+        if(Auth::check() == true)
         {
-            $user = $authUser->toArray(); 
+            $user = Auth::user()->toArray(); 
         } else {
             $user = null;
         }
 
-        $information  = array('information' => ['order' => $order, 'user' => $user]);
+        $information  = array('information' => ['totalPrice' => $totalPrice, 'user' => $user]);
 
         return view('order', $information);
     }
@@ -60,15 +59,15 @@ class BasketController extends Controller
         }
         $order = Order::find($orderId);
 
-        $authUser = Auth::user();
-        if($authUser != null)
+
+        if(Auth::check() == true)
         {
-            $idOfUser = $authUser->toArray()['id'];
+            $userId =  Auth::user()->toArray()['id'];
         } else {
-            $idOfUser = null; 
+            $userId = null; 
         }
 
-        $order->saveOrder($idOfUser,
+        $order->saveOrder($userId,
                           $request->name,
                           $request->surname,
                           $request->deliveryAddress);
@@ -127,14 +126,14 @@ class BasketController extends Controller
         $orders = Order::get();
         if(count($orders) == 0)
         {
-            $orderDescription = ['numberOfOrder' =>  "order".(strval(random_int(0,1000)))];
+            $orderDescription = ['numberOfOrder' =>  "order".(strval(random_int(1,10)))];
         }
         else
         {
             $ordersArray = $orders[count($orders)-1]->toArray();
             $numberOfLastOrder = $ordersArray["numberOfOrder"];
     
-            $orderDescription = ['numberOfOrder' =>  $numberOfLastOrder.(strval(random_int(0,1000)))];
+            $orderDescription = ['numberOfOrder' =>  $numberOfLastOrder.(strval(random_int(1,10)))];
         }
         $order = Order::create($orderDescription);
         session(['orderId' => $order->id]);

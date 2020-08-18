@@ -8,16 +8,16 @@
         @if(session()->has('successRemove'))
             <p class="alert alert-warning">Pizza {{ session()->get('successRemove') }} was remove from your basket!</p> 
         @endif
-    <h1>Корзина</h1>
-    <p>Оформление заказа</p>
+    <h1>Basket</h1>
+    <p>Order checkout</p>
     <div class="panel">
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Название</th>
-                    <th>Кол-во</th>
-                    <th>Цена</th>
-                    <th>Стоимость</th>
+                    <th>Name</th>
+                    <th>Count of product</th>
+                    <th>Price</th>
+                    <th>Total price</th>
                 </tr>
             </thead>
             <tbody>
@@ -44,23 +44,23 @@
                         </div>
                     </td>
                     <td>{{$product->price}} $</td>
-                    <td>{{$product->getPriceForCount()}} $</td>
+                    <td>{{$product->getPriceForCount()}} {{session('currencySymbol', '$')}}</td>
                 </tr>
                 @endforeach
                 <tr>
                     <td colspan="3">Delivery price:</td>
-                    <td>10 $</td>
+                    <td>{{$order->getPriceForDelivery()}} {{session('currencySymbol', '$')}}</td>
                 </tr>
                 <tr>
                     <td colspan="3">Total price:</td>
-                    <td>{{ $order->calculateTotalPriceForOrder() }} $</td>
+                    <td>{{ $order->calculateTotalPriceForOrder() }} {{session('currencySymbol', '$')}}</td>
                 </tr>
             </tbody>
         </table>
         <br>
         <div class="btn-group pull-right" role="group">
-            <a type="button" class="btn btn-success" href="{{ route('basket-place') }}">Оформить
-                заказ</a>
+            <a type="button" class="btn btn-success" href="{{ route('basket-place') }}">Arrange
+                order</a>
         </div>
     </div>
 </div>
