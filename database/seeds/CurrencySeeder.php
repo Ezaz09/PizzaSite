@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Currency;
 
 class CurrencySeeder extends Seeder
 {
@@ -11,19 +12,22 @@ class CurrencySeeder extends Seeder
      */
     public function run()
     {
-        DB::table('currencies')->insert([
-           [
+
+           $currency = [
                'code' => 'USD',
                'symbol' => '$',
                'is_main' => 1,
                'rate' => 1,
-           ],
-           [
+           ];
+        Currency::create($currency);
+        
+           $currency = [
             'code' => 'EUR',
             'symbol' => '€',
             'is_main' => 0,
             'rate' => 0,
-        ],
-        ]);
+           ];
+        Currency::create($currency);
+       
     }
 }
