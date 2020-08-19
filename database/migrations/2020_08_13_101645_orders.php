@@ -19,10 +19,7 @@ class Orders extends Migration
             $table->string('numberOfOrder');
             $table->string('name')->nullable();
             $table->string('surname')->nullable();
-            //$table->string('product');
             $table->string('deliveryAddress')->nullable();
-            //$table->bigInteger('countOfProduct');
-            //$table->bigInteger('amountPerLine');
             $table->timestamps();
         });
     }
