@@ -38,6 +38,7 @@ class Order extends Model
         $this->save();
 
         session()->forget('orderId');
+        session()->forget('countOfProduct');
     }
 
     public function getPriceForDelivery()
