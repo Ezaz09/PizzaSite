@@ -11,7 +11,10 @@ class AccountController extends Controller
     public function account()
     {
         $userId = Auth::user()->toArray()['id'];
-        $orders = Order::where('user_id', $userId)->get();
+        $orders = Order::where([
+                                ['user_id','=', $userId],
+                                ['approved_order','=',1],
+                                ])->get();
         return view('auth.orders.index', compact('orders'));
     }
 
