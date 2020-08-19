@@ -14,7 +14,7 @@ class UpdateOrderTable extends Migration
     public function up()
     {
         Schema::table('orders', function(Blueprint $table){
-            $table->integer('totalPrice')->default(1)->after('deliveryAddress');
+            $table->double('totalPrice')->default(1)->after('deliveryAddress');
             $table->string('currencyOfOrder')->default('$')->after('totalPrice');
         });
     }

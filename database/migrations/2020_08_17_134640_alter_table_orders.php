@@ -14,7 +14,9 @@ class AlterTableOrders extends Migration
     public function up()
     {
         Schema::table('orders', function(Blueprint $table){
-            $table->renameColumn('idOfUser','user_id');
+            $table->dropColumn('idOfUser');
+            $table->integer('user_id')->nullable()->after('id');
+            //$table->renameColumn('idOfUser','user_id');
         });
     }
 
@@ -26,7 +28,9 @@ class AlterTableOrders extends Migration
     public function down()
     {
         Schema::table('orders', function(Blueprint $table){
-            $table->renameColumn('user_id','idOfUser');
+            $table->dropColumn('user_id');
+            $table->integer('idOfUser')->nullable()->after('id');
+            //$table->renameColumn('user_id','idOfUser');
         });
     }
 }
