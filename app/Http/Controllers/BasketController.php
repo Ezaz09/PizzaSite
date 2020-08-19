@@ -76,7 +76,8 @@ class BasketController extends Controller
         return redirect()->route('index');
     }
 
-    public function basketAdd($productId){
+    public function basketAdd($productId)
+    {
         $orderId = session('orderId');
         if (is_null($orderId))
         {
@@ -96,9 +97,8 @@ class BasketController extends Controller
         $product = Product::find($productId);
         session()->flash('successAdded', $product->name);
 
-        $this->updateCountOfProductInSession(true);
-
-        return redirect()->route('basket');  
+        $this->updateCountOfProductInSession(true);  
+        return redirect()->back();
     }
 
     public function basketRemove($productId){
@@ -129,7 +129,7 @@ class BasketController extends Controller
 
         $this->updateCountOfProductInSession(false);
 
-        return redirect()->route('basket');  
+        return redirect()->back();  
     }
 
     private function createOrder(){

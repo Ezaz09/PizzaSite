@@ -7,7 +7,7 @@ use App\Services\CurrencyConvertion;
 
 class Order extends Model
 {
-    protected $fillable = ['user_id', 'numberOfOrder', 'name', 'surname', 'deliveryAddress'];
+    protected $fillable = ['user_id', 'numberOfOrder', 'name', 'surname', 'deliveryAddress', 'approved_order'];
 
     public function products(){
         return $this->belongsToMany(Product::class)->withPivot('count')->withTimestamps();
@@ -35,6 +35,7 @@ class Order extends Model
         $this->deliveryAddress = $deliveryAddress;
         $this->totalPrice = $this->calculateTotalPriceForOrder();
         $this->currencyOfOrder = session('currencySymbol', '$');
+        $this->approved_order = 1;
         $this->save();
 
         session()->forget('orderId');
