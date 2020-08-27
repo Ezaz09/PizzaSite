@@ -7,7 +7,7 @@ use App\Services\CurrencyConvertion;
 
 class Product extends Model
 {
-    protected $fillable = ['name', 'price', 'description', 'srcOfImage'];
+    protected $fillable = ['name', 'price', 'description', 'src_of_image'];
 
     public function getPriceForCount() {
         if(!is_null($this->pivot)){

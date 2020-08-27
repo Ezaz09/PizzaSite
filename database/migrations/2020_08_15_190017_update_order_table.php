@@ -14,8 +14,8 @@ class UpdateOrderTable extends Migration
     public function up()
     {
         Schema::table('orders', function(Blueprint $table){
-            $table->double('totalPrice')->default(1)->after('deliveryAddress');
-            $table->string('currencyOfOrder')->default('$')->after('totalPrice');
+            $table->double('total_price')->default(1)->after('delivery_address');
+            $table->string('currency_of_order')->default('$')->after('total_price');
         });
     }
 
@@ -27,8 +27,8 @@ class UpdateOrderTable extends Migration
     public function down()
     {
         Schema::table('orders', function(Blueprint $table){
-            $table->dropColumn('totalPrice');
-            $table->dropColumn('currencyOfOrder');
+            $table->dropColumn('total_price');
+            $table->dropColumn('currency_of_order');
         });
     }
 }

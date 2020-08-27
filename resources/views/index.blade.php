@@ -7,7 +7,7 @@
         @foreach($products as $product)
         <div class="col-sm-6 col-md-4">
             <div class="thumbnail">
-                <img src="{{$product->srcOfImage}}">
+                <img src="{{$product->src_of_image}}">
                 <div class="caption">
                     <h3>{{$product->name}}</h3>
                     <p>{{$product->price}} {{session('currencySymbol', '$')}}</p>

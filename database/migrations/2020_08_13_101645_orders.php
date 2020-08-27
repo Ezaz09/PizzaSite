@@ -16,10 +16,10 @@ class Orders extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->integer('idOfUser')->nullable();
-            $table->string('numberOfOrder');
+            $table->string('number_of_order');
             $table->string('name')->nullable();
             $table->string('surname')->nullable();
-            $table->string('deliveryAddress')->nullable();
+            $table->string('delivery_address')->nullable();
             $table->timestamps();
         });
     }

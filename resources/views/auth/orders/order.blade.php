@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="starter-template">
-    <h1>Order {{$order['numberOfOrder']}}</h1>
+    <h1>Order {{$order['number_of_order']}}</h1>
     <div class="panel">
         <table class="table table-striped">
             <thead>
@@ -18,7 +18,7 @@
                 <tr>
                     <td>
                         <a href="{{ route('pizza', $product->id) }}">
-                            <img height="56px" src="{{$product->srcOfImage}}">
+                            <img height="56px" src="{{$product->src_of_image}}">
                             {{$product->name}}
                         </a>
                     </td>
@@ -33,7 +33,7 @@
                 </tr>
                 <tr>
                     <td colspan="3">Total price:</td>
-                    <td>{{ $order->totalPrice }} {{$order->currencyOfOrder}}</td>
+                    <td>{{ $order->total_price }} {{$order->currency_of_order}}</td>
                 </tr>
             </tbody>
         </table>

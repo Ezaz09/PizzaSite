@@ -33,16 +33,16 @@
             
             @foreach($orders as $order)
                 <tr>
-                    <td>{{ $order->numberOfOrder}}</td>
+                    <td>{{ $order->number_of_order}}</td>
                     <td>{{ $order->name }}</td>
                     <td>{{ $order->surname }}</td>
-                    <td>{{ $order->deliveryAddress }}</td>
-                    <td>{{ $order->totalPrice }} </td>
-                    <td>{{ $order->currencyOfOrder }} </td>
+                    <td>{{ $order->delivery_address }}</td>
+                    <td>{{ $order->total_price }} </td>
+                    <td>{{ $order->currency_of_order }} </td>
                     <td>
                         <div class="btn-group" role="group">
                             <a class="btn btn-success" type="button"
-                               href="{{ route('get-order', $order->numberOfOrder) }}"
+                               href="{{ route('get-order', $order->number_of_order) }}"
                             >Open</a>
                         </div>
                     </td>
