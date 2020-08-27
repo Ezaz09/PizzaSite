@@ -18,7 +18,7 @@ class Products extends Migration
             $table->string('name');
             $table->bigInteger('price');
             $table->text('description');
-            $table->text('src_of_image');
+            $table->text('srcOfImage');
             $table->timestamps();
         }); 
     }

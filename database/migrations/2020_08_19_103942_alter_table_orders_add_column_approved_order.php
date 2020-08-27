@@ -14,7 +14,7 @@ class AlterTableOrdersAddColumnApprovedOrder extends Migration
     public function up()
     {
         Schema::table('orders', function(Blueprint $table){
-            $table->tinyInteger('approved_order')->default(0)->after('currency_of_order');
+            $table->tinyInteger('approved_order')->default(0)->after('currencyOfOrder');
         });
     }
 

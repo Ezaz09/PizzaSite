@@ -20,9 +20,6 @@ Auth::routes([
 
 Route::get('currency/{currencyCode}', 'MainController@changeCurrency')->name('currency');
 
-Route::get('/', 'MainController@index')->name('index');
-Route::get('/pizza/{product}', 'MainController@pizza')->name('pizza');
-
 Route::group(['middleware' => 'auth'], function() {
     Route::get('/account', 'AccountController@account')->name('your-account');
     Route::get('/account/{order}', 'AccountController@getOrder')->name('get-order');
@@ -30,6 +27,9 @@ Route::group(['middleware' => 'auth'], function() {
 });
 
 
+Route::get('/', 'MainController@index')->name('index');
+Route::get('/categories', 'MainController@categories')->name('categories');
+Route::get('/pizza/{product}', 'MainController@pizza')->name('pizza');
 
 Route::group(['prefix' => 'basket'], function(){
     Route::post('/add/{product}', 'BasketController@basketAdd')->name('basket-add');
@@ -42,5 +42,6 @@ Route::group(['prefix' => 'basket'], function(){
         Route::post('/remove/{product}', 'BasketController@basketRemove')->name('basket-remove');
     });
 });
+
 
 Route::get('/home', 'HomeController@index')->name('home');

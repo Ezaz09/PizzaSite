@@ -20,7 +20,7 @@ class AccountController extends Controller
 
     public function getOrder($numberOfOrder)
     {
-        $order = Order::where('number_of_order', $numberOfOrder)->first();
+        $order = Order::where('numberOfOrder', $numberOfOrder)->first();
 
         if(!Auth::user()->orders->contains($order))
         {
