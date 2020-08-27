@@ -25,7 +25,7 @@
                 <tr>
                     <td>
                         <a href="{{ route('pizza', $product->id) }}">
-                            <img height="56px" src="{{$product->srcOfImage}}">
+                            <img height="56px" src="{{$product->src_of_image}}">
                             {{$product->name}}
                         </a>
                     </td>

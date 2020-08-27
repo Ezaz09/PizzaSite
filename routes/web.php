@@ -28,7 +28,6 @@ Route::group(['middleware' => 'auth'], function() {
 
 
 Route::get('/', 'MainController@index')->name('index');
-Route::get('/categories', 'MainController@categories')->name('categories');
 Route::get('/pizza/{product}', 'MainController@pizza')->name('pizza');
 
 Route::group(['prefix' => 'basket'], function(){

@@ -136,14 +136,14 @@ class BasketController extends Controller
         $orders = Order::get();
         if(count($orders) == 0)
         {
-            $orderDescription = ['numberOfOrder' =>  "order".(strval(random_int(1,10)))];
+            $orderDescription = ['number_of_order' =>  "order".(strval(random_int(1,10)))];
         }
         else
         {
             $ordersArray = $orders[count($orders)-1]->toArray();
-            $numberOfLastOrder = $ordersArray["numberOfOrder"];
+            $numberOfLastOrder = $ordersArray["number_of_order"];
     
-            $orderDescription = ['numberOfOrder' =>  $numberOfLastOrder.(strval(random_int(1,10)))];
+            $orderDescription = ['number_of_order' =>  $numberOfLastOrder.(strval(random_int(1,10)))];
         }
         $order = Order::create($orderDescription);
         session(['orderId' => $order->id]);

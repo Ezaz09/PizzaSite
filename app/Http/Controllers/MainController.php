@@ -4,18 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use App\Currency;
+use App\Http\Resources\Product as ProductResources;
 use Illuminate\Http\Request;
 
 class MainController extends Controller
 {
     public function index()
     {
+        //$products = Product::paginate();
+        //return ProductResources::collection($products);
         $products = Product::get();
         return view('index', compact('products'));
-    }
-
-    public function categories(){
-        return view('categories');
     }
 
     public function pizza($id){
